@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film review</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/jquery.raty.css">
+        <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+    <style>
+        #loader {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        body {
+            background-image: url('food.jpg');
+        }
+        #loaderTitle {
+            width: 300px;
+            height: 48px;
+            text-align: center;
+        }
+        div {
+            background-color: white ;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loader">
+        <img src="cow.gif" alt="Computer man" style="width:960px;height:960px;">
+    </div>
+    <!-- header -->
+    <nav id="navbar" class="navbar navbar-expand-sm bg-light fixed-top">
+        <p class="navbar-brand">Food Reviews</p>
+        <button class="navbar-brand d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+            aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="./main.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" href="#signOutModal">Sign Out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- header end -->
+    <!-- section -->
+    <br>
+    <section class="py-5">
+        <div class="container">
+            <div class="card mb-3">
+                <br>
+                <div class="card-header">Create review</div>
+                <form id="createReviewForm" class="card-body">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="createReviewTitle" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Detailded</label>
+                        <input type="text" id="createReviewdetailed" class="form-control">
+                    </div>
+                    <!--<div class="form-group">
+                        <label>Website</label>
+                        <input type="text" id="Title" class="form-control" required>
+                    </div>-->
+                    <div class="form-group">
+                        <div>
+                            <label for="createPostImage" class="btn btn-warning">
+                                <i class="fas fa-images"></i> Upload Image
+                            </label>
+                        </div>
+                        <input type="file" id="createPostImage" class="d-none" accept=".png,.jpg,.jpeg">
+                        <p id="createPostImageURL"></p>
+                        <div id="imagePreview"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Rating</label>
+                        <dr>
+                            <div></div>
+                    </div>
+                    <div id="createReviewRating"></div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <button class="btn btn-success">Create view</button>
+                    </div>
+                </form>
+            </div>
+            <table class="table table-bordered">
+                <tbody id="tbody"></tbody>
+            </table>
+            <br>
+        </div>
+    </section>
+    <section class="py-5">
+        <div class="container">
+            <br>
+            <table class="table table-bordered">
+                <tbody id="committable"></tbody>
+            </table>
+            <br>
+        </div>
+    </section>
+    <!-- section end -->
+
+
+    <!-- signUpModal -->
+    <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form id="signUpForm" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sign Up</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="signUpEmail">Sign up email</label>
+                        <input id="signUpEmail" type="email" class="form-control" placeholder="email..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signUpPassword">Sign up password</label>
+                        <input id="signUpPassword" type="text" class="form-control" minlength="6"
+                            placeholder="password..." required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- signUpModal end -->
+    <!-- signInModal -->
+    <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form id="signInForm" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sign In</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="signInEmail">Sign in email</label>
+                        <input id="signInEmail" type="email" class="form-control" placeholder="email..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signInPassword">Sign in password</label>
+                        <input id="signInPassword" type="password" class="form-control" minlength="6"
+                            placeholder="password..." required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- signInModal end -->
+    <!-- signOutModal -->
+    <div class="modal fade" id="signOutModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="signInForm" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sign Out</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to log out ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="signOutBtn" class="btn btn-danger">Sign Out</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- signOutModal end -->
+
+    <!-- signUpModal -->
+    <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form id="signUpForm" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sign Up</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="signUpEmail">Sign up email</label>
+                        <input id="signUpEmail" type="email" class="form-control" placeholder="email..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signUpPassword">Sign up password</label>
+                        <input id="signUpPassword" type="text" class="form-control" minlength="6"
+                            placeholder="password..." required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- signUpModal end -->
+    <!-- signInModal -->
+    <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form id="signInForm" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sign In</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="signInEmail">Sign in email</label>
+                        <input id="signInEmail" type="email" class="form-control" placeholder="email..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signInPassword">Sign in password</label>
+                        <input id="signInPassword" type="password" class="form-control" minlength="6"
+                            placeholder="password..." required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- signInModal end -->
+    <!-- signOutModal -->
+    <div class="modal fade" id="signOutModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="signInForm" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sign Out</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to log out ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="signOutBtn" class="btn btn-danger">Sign Out</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- signOutModal end -->
+
+    <!-- updateblogModal -->
+    <div class="modal fade" id="updateblogModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <form id="updateblogForm" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update blog Model</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input id="updateblogId" class="d-none" type="text">
+                    <div class="form-group">
+                        <label for="updateblogName">Blog Name</label>
+                        <input id="updateblogName" type="text" class="form-control" placeholder="Blog name..." required>
+                    </div>
+                    <input id="updateblogId" class="d-none" type="text">
+                    <div class="form-group">
+                        <label for="updateblogdetailed">Blog Detailed</label>
+                        <input id="updateblogdetailed" type="text" class="form-control" placeholder="Blog Detailed..." required>
+                    </div>
+                    <input id="updateblogId" class="d-none" type="text">
+                    <div class="form-group">
+                        <label for="updateblogPicture">Blog Picture</label>
+                        <input id="updateblogPicture" type="text" class="form-control" placeholder="Blog Picture..." required>
+                    </div>
+                    <input id="updateblogId" class="d-none" type="text">
+                    <div class="form-group">
+                        <label for="updateblogRating">Blog Rating</label>
+                        <input id="updateblogRating" type="text" class="form-control" placeholder="Blog name..." required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+    </div>
+    <!-- updateblogModal end -->
+    <script src="jquery.raty.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+        integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/jquery.raty.min.js"></script>
+    <!--  Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+    <script src="./admin.js"></script>
+</body>
+
+</html>

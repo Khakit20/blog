@@ -21,13 +21,13 @@ firebase.auth().onAuthStateChanged(user => {
             $("#loader").fadeOut();
         } else {
             alert("YOU ARE NOT ADMIN");
-            window.location.href='./main.html';
+            window.location.href='main.html';
         }
     } else {
         //sign out
         console.log("sign out", user);
         alert("You are not login in")
-        window.location.href='./login.html';
+        window.location.href='login.html';
     }
 })
 
@@ -192,7 +192,7 @@ $signInForm.submit(function (e) {
             console.log("Sign In", res);
             alert("Sign in");
             if (email == "admin@gamil.com") {
-                window.location = "/admin.html";
+                window.location = "admin.html";
             }
         })
         .catch(err => {
@@ -210,7 +210,7 @@ $signOutBtn.click(function () {
     console.log("Ready for sign out");
     firebase.auth().signOut()
         .then(() => {
-            window.location = "/index.html"
+            window.location = "index.html"
         })
         .catch(err => console.log(err))
 });

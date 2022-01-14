@@ -17,85 +17,18 @@ const db = firebase.firestore();
 var Today=new Date();
 
 
-
-var $signUpForm = $("#signUpForm"),
-    $signUpEmail = $("#signUpEmail"),
-    $signUpPassword = $("#signUpPassword");
-    $signUpContiue = $("#signUpContiue");
-
-// Sign in form
-var $signInForm = $("#signInForm"),
-    $signInEmail = $("#signInEmail"),
-    $signInPassword = $("#signInPassword");
-
 firebase.auth().onAuthStateChanged(user => {
     if (user) {
         setTimeout(function(){},5000);
         $("#loader").fadeOut();
     } else {
-        console.log("sign out", user);
+        alert("You are not user");
+        window.location = "https://snwbs.github.io/blog/";
     }
 })
 
-$signUpForm.submit(function (e) {
-    e.preventDefault();
-    // When sign up form submitted
-    console.log("Ready for sign up");
-    const email = $signUpEmail.val();
-    const password = $signUpPassword.val();
-    firebase
-        .auth()
-        .createUserWithEmailAndPassword(email,password).then(res =>
-            {
-                console.log("Sign up",res);
-                window.location.href='https://snwbs.github.io/blog/check.html';
-            })
-            .catch(err => {
-                console.log(err);
-            })
-});
-
-$signUpContiue.submit(function (e) {
-    e.preventDefault();
-    alert("Sign up");
-    // When sign up form submitted
-    window.location.href='https://snwbs.github.io/blog/';
-});
-
-
 // Sign out button
 var $signOutBtn = $("#signOutBtn");
-
-$signInForm.submit(function (e) {
-    e.preventDefault();
-    // When sign in form submitted
-    console.log("Ready for sign in");
-    const email = $signInEmail.val();
-    const password = $signInPassword.val();
-    console.log(email, password);
-    // firebase sign in method
-    firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(res => {
-            console.log("Sign In", res);
-            alert("Sign in");
-            if (email == "admin@gmail.com") {
-                window.location = "https://snwbs.github.io/blog/admin.html";
-            }
-            else{
-                window.location = "https://snwbs.github.io/blog/main.html";
-            }
-        })
-        .catch(err => {
-            console.log(err);
-            if (err.code == 'auth/wrong-password') {
-                alert("wrong password");
-            } else if (err.code == 'auth/user-not-found') {
-                alert("User not found!");
-            }
-        });
-});
 
 $signOutBtn.click(function () {
     // When click sign out button
@@ -107,72 +40,9 @@ $signOutBtn.click(function () {
         .catch(err => console.log(err))
 });
 
-
-const $createReviewForm = $("#createReviewForm");
-const $createReviewTitle = $("#createReviewTitle");
-const $createReviewRating = $("#createReviewRating");
-const $Title = $("Title");
-const $createPostImage = $("#createPostImage");
-const $createPostImageURL = $("#createPostImageURL");
-const $imagePreview = $("#imagePreview");
-const $createPostBtn = $("#createPostBtn");
 const $tbody = $("#tbody");
 const $pushCommitForm = $("#pushCommitForm");
 const $pushCommittext = $("#pushCommittext");
-
-$createReviewRating.raty({ 
-    score: 1 
-});
-
-
-$createPostImage.change(function (e) {
-    // Get the file object when user choose any files
-    const file = this.files[0];
-    const fileName = file.name;
-    // Setup folder path for firebase storage
-    const storagePath = `previewImages/${fileName}`;
-    const ref = firebase.storage().ref(storagePath);
-    // Upload file to firebase storage
-    console.log(`Start Upload image to: ${storagePath}`);
-    $createPostImageURL.text(`Start Upload image to: ${storagePath}`);
-    ref.put(file)
-        .then(snapshot => {
-            // If file is uploaded successfully
-            console.log(snapshot);
-            // Get image URL
-            ref.getDownloadURL()
-                .then(imageURL => {
-                    console.log("imageURL", imageURL);
-                    $createPostImageURL.text(`${imageURL}`);
-                    const picture = (`<img src="${imageURL}">`);
-                    $imagePreview.append(picture);
-                })
-                .catch(err => {
-                    $createPostImageURL.text(`Error: ${err}`);
-                    console.log(err)
-                });
-        })
-        .catch(err => {
-            $createPostImageURL.text(`Error: ${err}`);
-            console.log(err)
-        });
-});
-
-$createReviewForm.submit(function (e) {
-    e.preventDefault();
-    console.log("New picture Form Submitted !");
-    const post = {
-        Name: $createReviewTitle.val(),
-        //website: $Title.val(),
-        picture: $createPostImageURL.text(),
-        rating: $createReviewRating.data('raty').score()
-    };
-    db.collection("blogList/").add(post)
-        .then(() => {
-            window.location.reload();
-        })
-        .catch(err => console.log(err));
-});
 
 $pushCommitForm.submit(function (e) {
     e.preventDefault();

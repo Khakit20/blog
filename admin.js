@@ -192,7 +192,7 @@ $signInForm.submit(function (e) {
             console.log("Sign In", res);
             alert("Sign in");
             if (email == "admin@gamil.com") {
-                window.location = "admin.html";
+                window.location = "https://snwbs.github.io/admin.html";
             }
         })
         .catch(err => {

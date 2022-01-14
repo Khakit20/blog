@@ -48,7 +48,7 @@ $signUpForm.submit(function (e) {
         .createUserWithEmailAndPassword(email,password).then(res =>
             {
                 console.log("Sign up",res);
-                window.location.href='check.html';
+                window.location.href='https://snwbs.github.io/blog/check.html';
             })
             .catch(err => {
                 console.log(err);
@@ -59,7 +59,7 @@ $signUpContiue.submit(function (e) {
     e.preventDefault();
     alert("Sign up");
     // When sign up form submitted
-    window.location.href='index.html';
+    window.location.href='https://snwbs.github.io/blog/index.html';
 });
 
 
@@ -81,10 +81,10 @@ $signInForm.submit(function (e) {
             console.log("Sign In", res);
             alert("Sign in");
             if (email == "admin@gmail.com") {
-                window.location = "admin.html";
+                window.location = "https://snwbs.github.io/blog/admin.html";
             }
             else{
-                window.location = "main.html";
+                window.location = "https://snwbs.github.io/blog/main.html";
             }
         })
         .catch(err => {
@@ -102,7 +102,7 @@ $signOutBtn.click(function () {
     console.log("Ready for sign out");
     firebase.auth().signOut()
         .then(() => {
-            window.location = "index.html"
+            window.location = "https://snwbs.github.io/blog/index.html"
         })
         .catch(err => console.log(err))
 });

@@ -21,13 +21,13 @@ firebase.auth().onAuthStateChanged(user => {
             $("#loader").fadeOut();
         } else {
             alert("YOU ARE NOT ADMIN");
-            window.location.href='main.html';
+            window.location.href='https://snwbs.github.io/blog/main.html';
         }
     } else {
         //sign out
         console.log("sign out", user);
         alert("You are not login in")
-        window.location.href='login.html';
+        window.location.href='https://snwbs.github.io/blog/login.html';
     }
 })
 
@@ -191,7 +191,7 @@ $signInForm.submit(function (e) {
         .then(res => {
             console.log("Sign In", res);
             alert("Sign in");
-            if (email == "admin@gamil.com") {
+            if (email == "admin@gmail.com") {
                 window.location = "https://snwbs.github.io/blog/admin.html";
             }
         })
@@ -210,7 +210,7 @@ $signOutBtn.click(function () {
     console.log("Ready for sign out");
     firebase.auth().signOut()
         .then(() => {
-            window.location = "index.html"
+            window.location = "https://snwbs.github.io/blog/index.html"
         })
         .catch(err => console.log(err))
 });

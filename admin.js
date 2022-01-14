@@ -26,21 +26,11 @@ firebase.auth().onAuthStateChanged(user => {
     } else {
         //sign out
         console.log("sign out", user);
-        alert("Sign out")
         window.location.href='https://snwbs.github.io/blog/';
     }
 })
 
 var $blogTableBody = $("#blogTableBody");
-
-var $signUpForm = $("#signUpForm"),
-    $signUpEmail = $("#signUpEmail"),
-    $signUpPassword = $("#signUpPassword");
-
-// Sign in form
-var $signInForm = $("#signInForm"),
-    $signInEmail = $("#signInEmail"),
-    $signInPassword = $("#signInPassword");
 
 $("body").delegate(".delete-blog-btn", "click", function () {
     console.log($(this).attr("data-id"));
@@ -154,56 +144,9 @@ $("#updateblogForm").submit(function (e) {
         .catch(err => console.log(err));
 })
 
-$signUpForm.submit(function (e) {
-    e.preventDefault();
-    // When sign up form submitted
-    console.log("Ready for sign up");
-    const email = $signUpEmail.val();
-    const password = $signUpPassword.val();
-    firebase
-        .auth()
-        .createUserWithEmailAndPassword(email,password).then(res =>
-            {
-                console.log("Sign up",res);
-                alert("Sign up");
-                window.location.reload();
-            })
-            .catch(err => {
-                console.log(err);
-            })
-});
-
 
 // Sign out button
 var $signOutBtn = $("#signOutBtn");
-
-$signInForm.submit(function (e) {
-    e.preventDefault();
-    // When sign in form submitted
-    console.log("Ready for sign in");
-    const email = $signInEmail.val();
-    const password = $signInPassword.val();
-    console.log(email, password);
-    // firebase sign in method
-    firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(res => {
-            console.log("Sign In", res);
-            alert("Sign in");
-            if (email == "admin@gmail.com") {
-                window.location = "https://snwbs.github.io/blog/admin.html";
-            }
-        })
-        .catch(err => {
-            console.log(err);
-            if (err.code == 'auth/wrong-password') {
-                alert("wrong password");
-            } else if (err.code == 'auth/user-not-found') {
-                alert("User not found!");
-            }
-        });
-});
 
 $signOutBtn.click(function () {
     // When click sign out button

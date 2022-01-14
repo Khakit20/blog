@@ -26,7 +26,7 @@ firebase.auth().onAuthStateChanged(user => {
     } else {
         //sign out
         console.log("sign out", user);
-        alert("You are not login in")
+        alert("Sign out")
         window.location.href='https://snwbs.github.io/blog/login.html';
     }
 })

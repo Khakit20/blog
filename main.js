@@ -59,7 +59,7 @@ $signUpContiue.submit(function (e) {
     e.preventDefault();
     alert("Sign up");
     // When sign up form submitted
-    window.location.href='https://snwbs.github.io/blog/index.html';
+    window.location.href='https://snwbs.github.io/blog/';
 });
 
 
@@ -102,7 +102,7 @@ $signOutBtn.click(function () {
     console.log("Ready for sign out");
     firebase.auth().signOut()
         .then(() => {
-            window.location = "https://snwbs.github.io/blog/index.html"
+            window.location = "https://snwbs.github.io/blog/";
         })
         .catch(err => console.log(err))
 });

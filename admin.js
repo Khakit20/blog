@@ -27,7 +27,7 @@ firebase.auth().onAuthStateChanged(user => {
         //sign out
         console.log("sign out", user);
         alert("Sign out")
-        window.location.href='https://snwbs.github.io/blog/login.html';
+        window.location.href='https://snwbs.github.io/blog/';
     }
 })
 
@@ -210,7 +210,7 @@ $signOutBtn.click(function () {
     console.log("Ready for sign out");
     firebase.auth().signOut()
         .then(() => {
-            window.location = "https://snwbs.github.io/blog/index.html"
+            window.location = "https://snwbs.github.io/blog/"
         })
         .catch(err => console.log(err))
 });
@@ -277,6 +277,7 @@ $createReviewForm.submit(function (e) {
     };
     db.collection("blogList/").add(post)
         .then(() => {
+            alert("This post has been release");
             window.location.reload();
         })
         .catch(err => console.log(err));

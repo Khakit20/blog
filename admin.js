@@ -50,7 +50,7 @@ $("body").delegate(".delete-blog-btn", "click", function () {
         .delete()
         .then(() => {
             alert("This blog is removed");
-            //window.location.reload();
+            window.location.reload();
         })
         .catch(err => console.log(err))
 });
